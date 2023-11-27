@@ -76,7 +76,7 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	w.Write(result)
 }
 
-func createProduct(w http.ResponseWriter, r *http.Request) {
+func addProduct(w http.ResponseWriter, r *http.Request) {
 	product := &Product{}
 	err := json.NewDecoder(r.Body).Decode(product)
 	if err != nil {
