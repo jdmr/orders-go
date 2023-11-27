@@ -20,7 +20,7 @@ create table orders (
     ,customer_id varchar(50) not null
     ,order_date timestamp not null
     ,"status" varchar(50) not null
-    ,foreign key (customer_id) references customers(id)
+    ,foreign key (customer_id) references customers(id) on delete cascade
 );
 
 create table order_items (
@@ -29,8 +29,8 @@ create table order_items (
     ,product_id varchar(50) not null
     ,quantity int not null
     ,price money not null
-    ,foreign key (order_id) references orders(id)
-    ,foreign key (product_id) references products(id)
+    ,foreign key (order_id) references orders(id) on delete cascade
+    ,foreign key (product_id) references products(id) on delete cascade
 );
 
 create table transactions (
@@ -38,7 +38,7 @@ create table transactions (
     ,order_id varchar(50) not null
     ,transaction_date timestamp not null
     ,amount money not null
-    ,foreign key (order_id) references orders(id)
+    ,foreign key (order_id) references orders(id) on delete cascade
 );
 
 insert into customers(id,name) values('1','John');

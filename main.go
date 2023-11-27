@@ -37,6 +37,12 @@ func main() {
 	router.HandleFunc("/products/{productID}", updateProduct).Methods("PUT")
 	router.HandleFunc("/products/{productID}", deleteProduct).Methods("DELETE")
 
+	router.HandleFunc("/orders", getOrders).Methods("GET")
+	router.HandleFunc("/orders", addOrder).Methods("POST")
+	router.HandleFunc("/orders/{orderID}", getOrder).Methods("GET")
+	router.HandleFunc("/orders/{orderID}", updateOrder).Methods("PUT")
+	router.HandleFunc("/orders/{orderID}", deleteOrder).Methods("DELETE")
+
 	log.Println("Starting server on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

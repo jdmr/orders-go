@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
 
@@ -93,12 +94,14 @@ func addProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if product.ID == "" || product.Name == "" || product.Price == "" {
-		log.Println("Missing product id, name, or price")
+	if product.Name == "" || product.Price == "" {
+		log.Println("Missing product name, or price")
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("missing productID, name, or price"))
+		w.Write([]byte("missing product name, or price"))
 		return
 	}
+
+	product.ID = uuid.New().String()
 
 	_, err = db.Exec("INSERT INTO products (id, name, price) VALUES ($1, $2, $3)", product.ID, product.Name, product.Price)
 	if err != nil {
